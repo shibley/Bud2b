@@ -23,23 +23,7 @@ namespace Bud2b.Modules.Common.Profile
 
         public async new Task<ActionResult> Store()
         {
-            //var oAuthResponse = Session["InstaSharp.AuthInfo"] as OAuthResponse;
-            //var userResponse = Session["InstaSharp.UserInfo"] as UserResponse;
-            //var mediaResponse = Session["InstaSharp.Media"] as MediasResponse;
-
-            //if (oAuthResponse == null)
-            //{
-            //    return RedirectToAction("Login");
-            //}
-
-            //if (userResponse == null)
-            //{
-            //    userResponse = await GetUserInfo(oAuthResponse);
-            //    mediaResponse = Session["InstaSharp.Media"] as MediasResponse;
-            //}
-
-            //ViewData["Media"] = mediaResponse.Data;
-            var url = string.Format("https://www.instagram.com/_chalicefarms/media/");
+            var url = string.Format("https://www.instagram.com/_chalicefarms/?__a=1");
 
             var syncClient = new WebClient();
             var content = syncClient.DownloadString(url);
