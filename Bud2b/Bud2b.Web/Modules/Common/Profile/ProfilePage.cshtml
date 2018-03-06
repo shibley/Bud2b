@@ -78,7 +78,7 @@
             <div class="box-body box-profile">
                 @*<img class="profile-user-img img-responsive img-circle" src="" alt="User profile picture" />*@
                 <img class="profile-user-img img-responsive img-circle" src="@Model.user.profile_pic_url" alt="@Model.user.full_name">
-                <h3 class="profile-username text-center">@Model.user.username</h3>
+                <h3 class="profile-username text-center">@Model.user.username</h3>@HttpContext.Current.Request.Url.Host
                 @*    <p class="text-muted text-center">Intagram: <a href="http://instagram.com/@Model.Username">@Model.Username</a></p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
@@ -158,18 +158,18 @@
                                                     @media.caption.text
                                                 }*@
                                             <div class="row">
-                                                <div class="col-xs-12 col-md-12">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
                                                         <fieldset>
                                                             <div class="row">
-                                                                <label for="Active" class="col-sm-4 control-label">Show:</label>
+                                                                <label for="Active" class="col-sm-8 control-label">Show:</label>
                                                                 <div class="col-sm-2">
                                                                     @Html.CheckBox("Show", new { style = "height: 15px;" })
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <label for="Price" class="col-sm-4 control-label">Price:</label>
-                                                                <div class="col-sm-4">
+                                                                <label for="Price" class="col-sm-8 control-label">Price:</label>
+                                                                <div class="col-sm-2">
                                                                     @Html.TextBox("Price", null, new { style = "width: 50px; height: 15px;" })
                                                                 </div>
                                                             </div>

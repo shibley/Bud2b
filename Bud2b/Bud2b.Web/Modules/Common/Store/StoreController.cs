@@ -21,7 +21,7 @@ namespace Bud2b.Modules.Common.Profile
     public class StoreController : Controller
     {
 
-        public async new Task<ActionResult> Store()
+        public async new Task<ActionResult> Index()
         {
             var url = string.Format("https://www.instagram.com/_chalicefarms/?__a=1");
 

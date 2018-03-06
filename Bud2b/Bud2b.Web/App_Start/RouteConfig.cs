@@ -46,6 +46,15 @@ namespace Bud2b
                     return null;
                 }
 
+                string controller = "Store";//(segments.Length > 0) ? segments[0] : "Store";
+                string action = "Store";// (segments.Length > 1) ? segments[1] : "Index";
+
+
+                var routeData = new RouteData(this, new MvcRouteHandler());
+                routeData.Values.Add("controller", controller); //Goes to the relevant Controller  class
+                routeData.Values.Add("action", action); //Goes to the relevant action method on the specified Controller
+                routeData.Values.Add("subdomain", subdomain); //pass subdomain as argument to action method
+
                 return null;
             }
             public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)

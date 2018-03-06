@@ -198,5 +198,11 @@
                 return false;
             }
         }
+
+        private bool ValidateUserSubdomain()
+        {
+
+            return false;
+        }
     }
 }

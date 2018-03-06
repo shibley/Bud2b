@@ -1775,6 +1775,8 @@
     </Compile>
     <Compile Include="Migrations\DefaultDB\DefaultDB_20170220_210000_MultiTenant.cs" />
     <Compile Include="Migrations\DefaultDB\DefaultDB_20170220_210001_MultiTenant.cs" />
+    <Compile Include="Migrations\DefaultDB\DefaultDB_20180220_210001_MultiTenant.cs" />
+    <Compile Include="Migrations\DefaultDB\DefaultDB_20180305_210001_MultiTenant.cs" />
     <Compile Include="Modules\Administration\AdministrationNavigation.cs" />
     <Compile Include="Modules\Administration\Language\LanguageLookup.cs" />
     <Compile Include="Modules\Administration\RolePermission\RolePermissionUpdateRequest.cs" />

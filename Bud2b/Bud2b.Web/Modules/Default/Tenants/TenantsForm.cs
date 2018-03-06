@@ -14,5 +14,9 @@ namespace Bud2b.Default.Forms
     public class TenantsForm
     {
         public String TenantName { get; set; }
+
+        public String Domain { get; set; }
+
+        public String InstagramAccount { get; set; }
     }
 }

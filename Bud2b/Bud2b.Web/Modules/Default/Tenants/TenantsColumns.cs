@@ -17,5 +17,9 @@ namespace Bud2b.Default.Columns
         public Int32 TenantId { get; set; }
         [EditLink]
         public String TenantName { get; set; }
+        [EditLink]
+        public String Domain { get; set; }
+        [EditLink]
+        public String InstagramAccount { get; set; }
     }
 }

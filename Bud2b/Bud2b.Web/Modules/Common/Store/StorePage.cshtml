@@ -4,78 +4,265 @@
     ViewData["BodyClass"] = "lockscreen";
 }
 
-
 @model Bud2b.Modules.Common.Instagram.Instagram.RootObject
 
-<div>
-    <div class="col-md-9">
-        <!-- Profile Image -->
-        <div class="active tab-pane">
-            <div class="box-body box-profile">
-                @*<img class="profile-user-img img-responsive img-circle" src="" alt="User profile picture" />*@
-                <img class="profile-user-img img-responsive img-circle" src="@Model.user.profile_pic_url" alt="@Model.user.full_name">
-                <h3 class="profile-username text-center">@Model.user.username</h3>
-                @*    <p class="text-muted text-center">Intagram: <a href="http://instagram.com/@Model.Username">@Model.Username</a></p>
-                    <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
-                            <b>Followers</b> <a class="pull-right">@Model.Counts.FollowedBy</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Following</b> <a class="pull-right">@Model.Counts.Follows</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Friends</b> <a class="pull-right">13,287</a>
-                        </li>
-                    </ul>*@
-                @*<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>*@
+    @*<div class="header">
+        <h1><a href="">@Model.user.username</a></h1>
+        
+    </div>*@
+
+<div class="public-login-wrapper">
+    <div class="row message">
+        <p>
+
+        </p>
+    </div>
+    <div class="login-box">
+        <div class="login-logo">
+            @*@Texts.Navigation.SiteTitle*@
+            @Model.user.full_name
+            <img class="profile-user-img img-responsive img-circle" src="@Model.user.profile_pic_url" alt="@Model.user.full_name">
+        </div>
+        <div class="login-box-body">
+            <p class="login-box-msg">@Texts.Forms.Membership.Login.FormTitle</p>
+            <div id="LoginPanel">
             </div>
-            <!-- /.box-body -->
+            <div class="social-auth-links text-center">
+                    <p>- @Texts.Forms.Membership.Login.OR -</p>
+                    @*<a href="#" class="btn btn-block btn-social btn-facebook btn-flat">
+                        <i class="fa fa-facebook"></i> @Texts.Forms.Membership.Login.FacebookButton
+                    </a>
+                    <a href="#" class="btn btn-block btn-social btn-google btn-flat">
+                        <i class="fa fa-google-plus"></i> @Texts.Forms.Membership.Login.GoogleButton
+                    </a>*@
+                </div>
+            <a href="@Url.Content("~/Account/ForgotPassword")">@Texts.Forms.Membership.Login.ForgotPassword</a><br>
+            <a href="@Url.Content("~/Account/SignUp")" class="text-center">@Texts.Forms.Membership.Login.SignUpButton</a>
         </div>
     </div>
-    <!-- /.col -->
-    <div class="col-md-9">
-        <div class="active tab-pane" id="activity">
 
-            <!-- Post -->
-            <div class="post">
-                <!-- /.user-block -->
-                <div class="row margin-bottom">
-                    @*<div class="col-sm-6">
-                            <img class="img-responsive" src="~/Content/adminlte/img/photo1.jpg" alt="Photo">
-                        </div>*@
-                    <!-- /.col -->
-                    <div id="products" class="row list-group">
-                        @foreach (var media in Model.user.media.nodes)
-                        {
-                            <div class="item  col-xs-3 col-lg-3">
-                                <div class="thumbnail">
-                                    <img class="group list-group-image" src="@media.thumbnail_src" alt="" />
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-12">
-                                            <div class="form-group">
-                                                <fieldset>
-                                                            
-                                                    <div class="row">
-                                                        <label for="Price" class="col-sm-4 control-label">Price:</label>
-                                                        <div class="col-sm-4">
-                                                            @Html.TextBox("Price", "login to see price", new { style = "width: 50px; height: 15px;" })
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
+    @*<div class="public-login-form">
+
+        <div class="login-box" style='padding-top: 20px;'>
+
+            <div style='width:150px; margin:0 auto; margin-bottom:20px;'>
+                <img class="profile-user-img img-responsive img-circle" src="@Model.user.profile_pic_url" alt="@Model.user.full_name" style="width: 150px;">
+
+            </div>
+
+            <div style="text-align:center;font-size:28px;font-weight:500;margin-bottom:20px;">Log in</div>
+
+
+            <form method="POST" action="" accept-charset="UTF-8" class="form-inline">                   
+                <div class="form-group login-form-group">
+                    <input class="form-control" style="margin-right:10px" placeholder="Username" name="username" type="text">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input checked="checked" name="remember" type="checkbox" value="remember"> <span style="vertical-align:top;">Remember me</span>
+                    </label>
+                </div>
+                <input class="btn-glow primary signup" style="padding:6px 22px;" data-disable-with="Logging in..." type="submit" value="Log In">
+            </form>
+            <div class="pull-left" style="margin-top:8px;margin-left:6px;">
+                <a href="" class="pull-right">Forgot password?</a>
+            </div>
+
+            <div style="max-width:800px;margin:60px auto 0 auto;">
+                <span style="font-size:16px;margin-right:10px;">Don't have an account? </span>
+                <button data-toggle="modal" data-target="#signup-form-modal" class="btn-glow inverse">Request a Wholesale Account</button>
+            </div>
+
+        </div>
+    </div>*@
+</div>
+
+<div class="public-shop">
+
+    <div style="max-width:1200px;margin:0 auto;">
+
+        @*<div style="text-align:center;font-size:28px;font-weight:500;margin-bottom:50px;">Browse Our Shop</div>
+
+        <div growl></div>
+
+        <div ng-if="!ready" us-spinner style="margin-top:100px;"></div>
+
+        <div ng-hide="items.length" ng-if="ready" style="text-align:center;font-size:16px;">
+            <p>Sorry, we don't have any products for sale. Please check back later.</p>
+        </div>*@
+
+        @*<div ng-show="items.length" ng-if="ready">*@
+
+            @*<div class="row table-search order-search">
+                <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1 input-group" style="margin-bottom:20px;">
+                    <input type="text" class="form-control" placeholder="Begin typing a product number or SKU to search..." ng-model="data.query" ng-change="data.currentPage = 1; setFilteredPaginatedItems()">
+                    <span class="input-group-addon"><i class="icon-search"></i></span>
+                </div>
+                <div class="col-xs-4 col-xs-offset-1 col-sm-4 col-sm-offset-1 col-md-2" style="max-width:100px;">
+                    <span class="filter-by-descriptor">Filter By:</span>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 search-select">
+                    <select ng-options="key as value for (key , value) in categories" class="form-control" ng-model="data.categoryQuery" ng-change="data.currentPage = 1; setFilteredPaginatedItems()">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+            </div>*@
+
+            @*<div class="row" style="margin-top:40px;">
+                <div class="col-lg-3 col-md-6" ng-repeat="item in filteredPaginatedItems" style="margin-bottom:50px;">
+
+                    <div class="col-item">
+                        <a href="#">
+                            <div class="photo">
+                                <img ng-src="{{ item.image }}" alt="" ng-if="item.image" />
+                                <img src="/assets/images/no-image-500x500.jpg" alt="" ng-if="!item.image" />
+                                <div class="overlay">
+                                    <p>Log in for details...</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="info">
+                            <div class="name">
+                                <span><a href="#">{{ item.name }}</a></span>
+                            </div>
+                            <div class="sku">
+                                <span>{{ item.sku }}</span>
+                            </div>
+                            <div class="price-public">
+                                <span>Log in for pricing</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <span class="col-xs-12" ng-hide="filteredPaginatedItems.length">No products found.</span>
+            </div>*@
+            <div class="row" style="margin-top:40px;">
+                @foreach (var media in Model.user.media.nodes)
+                {
+                    <div class="item  col-xs-3 col-lg-3">
+                        <div class="thumbnail">
+                            <img class="group list-group-image" src="@media.thumbnail_src" alt="" />
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="form-group">
+                                        <fieldset>
+
+                                            <div class="row">
+                                                <label for="Price" class="col-sm-4 control-label">Price:</label>
+                                                <div class="col-sm-4">
+                                                    @Html.TextBox("Price", "login to see price", new { style = "width: 50px; height: 15px;" })
+                                                </div>
                                             </div>
-                                        </div>
+                                        </fieldset>
                                     </div>
                                 </div>
                             </div>
-                        }
+                        </div>
                     </div>
-                </div>
-                <!-- /.row -->
+                 }
             </div>
-            <!-- /.post -->
-        </div>            
+                @*<div style="text-align:center;">
+                <ul class="pagination" ng-show="data.totalPages > 1">
+                    <li ng-class="{disabled: data.currentPage == 1}">
+                        <a href ng-click="setPage(data.currentPage-1)">&#8249;</a>
+                    </li>
+                    <li ng-repeat="pageNumber in paginationRange()" ng-class="{active: pageNumber == data.currentPage}" ng-click="setPage(pageNumber)">
+                        <a href ng-bind="pageNumber"></a>
+                    </li>
+                    <li ng-class="{disabled: data.currentPage == data.totalPages}">
+                        <a href ng-click="setPage(data.currentPage+1)">&#8250;</a>
+                    </li>
+                </ul>
+            </div>*@
 
+            @*</div>*@
     </div>
-    <!-- /.col -->
 </div>
-<!-- /.row -->
+
+<div class="modal fade" id="signup-form-modal" tabindex="-1" role="dialog" aria-labelledby="signupFormLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="signupFormLabel">Request a Wholesale Account</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" id="signup-form-errors"></div>
+                <form method="POST" action="https://ganeshvapes.ordercircle.com/signup" accept-charset="UTF-8" class="form-horizontal" id="signup-form">
+                    <input name="_token" type="hidden" value="UaT7DaPiOPDFTWGZCQp1NINVtvzL1YLjwmQbg61b">
+                    <div class="form-group">
+                        <label for="name" class='control-label col-sm-3'>Name*</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="name" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="company_name" class='control-label col-sm-3'>Company Name*</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="company_name" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class='control-label col-sm-3'>Work Email Address*</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="email" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number" class='control-label col-sm-3'>Phone Number*</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="phone_number" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tax_id" class='control-label col-sm-3'>Tax ID (EIN/VAT)</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="tax_id" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="questions" class='control-label col-sm-3'>Questions and Concerns</label>
+                        <div class="col-sm-8">
+                            <textarea style="height: 100px" class="form-control" name="questions" cols="50" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Retail Marijuana Shop" class='control-label col-sm-3'>Retail Marijuana Shop*</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="Retail Marijuana Shop" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Head Shop/ Smoke Shop" class='control-label col-sm-3'>Head Shop/ Smoke Shop*</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="Head Shop/ Smoke Shop" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="current_customer" class="control-label col-sm-7">Are you currently a wholesale customer of ours?*</label>                            
+                        <div class="col-sm-3">
+                            <label class="option-label"><input name="current_customer" type="radio" value="yes" id="current_customer"> Yes</label>
+                            <label class="option-label"><input name="current_customer" type="radio" value="no" id="current_customer"> No</label>
+                        </div>
+                    </div>
+                    <div class="note">
+                        Your request will be sent to our sales team, who will contact you by phone or email shortly to activate your account.
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <input class="btn-glow primary" id="signup-button" type="submit" value="Submit">                                
+                            <button type="button" class="btn-glow" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>                    
+                <div class="alert alert-success" id="signup-success-message">
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

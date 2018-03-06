@@ -30,6 +30,20 @@ namespace Bud2b.Default.Entities
             set { Fields.TenantName[this] = value; }
         }
 
+        [DisplayName("Tenant Domain"), Size(100), QuickSearch]
+        public String Domain
+        {
+            get { return Fields.Domain[this]; }
+            set { Fields.Domain[this] = value; }
+        }
+
+        [DisplayName("Instagram Account"), Size(100), QuickSearch]
+        public String InstagramAccount
+        {
+            get { return Fields.InstagramAccount[this]; }
+            set { Fields.InstagramAccount[this] = value; }
+        }
+
         IIdField IIdRow.IdField
         {
             get { return Fields.TenantId; }
@@ -51,6 +65,8 @@ namespace Bud2b.Default.Entities
         {
             public Int32Field TenantId;
             public StringField TenantName;
+            public StringField Domain;
+            public StringField InstagramAccount;
 
             public RowFields()
                 : base()

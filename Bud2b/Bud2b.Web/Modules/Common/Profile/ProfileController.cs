@@ -26,7 +26,7 @@ namespace Bud2b.Modules.Common.Profile
 
         //InstagramConfig config = new InstagramConfig(clientId, clientSecret, redirectUri, "");
 
-        public async new Task<ActionResult> Profile()
+        public async new Task<ActionResult> Index()
         {
             //var oAuthResponse = Session["InstaSharp.AuthInfo"] as OAuthResponse;
             //var userResponse = Session["InstaSharp.UserInfo"] as UserResponse;
@@ -58,7 +58,7 @@ namespace Bud2b.Modules.Common.Profile
                 instagramData = (Instagram.RootObject)serializer.ReadObject(ms);
             }
 
-            return View(MVC.Views.Common.Profile.ProfilePage, instagramData);//, userResponse.Data);
+            return View(MVC.Views.Common.Profile.ProfilePage, instagramData);
         }
 
         static void asyncClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
