@@ -16,35 +16,28 @@ namespace Bud2b.Modules.Common.Profile
     using System.Net;
     using System.Runtime.Serialization.Json;
     using System.Text;
+    using Serenity;
+    using Serenity.Abstractions;
+    using Serenity.Data;
+    using Administration.Entities;
+    using Default.Entities;
 
     [Authorize, RoutePrefix("Profile"), Route("{action=index}")]
     public class ProfileController : Controller
     {
-        static string clientId = ConfigurationManager.AppSettings["MS_WebHookReceiverSecret_InstagramId"];
-        static string clientSecret = ConfigurationManager.AppSettings["MS_WebHookReceiverSecret_Instagram"];
-        static string redirectUri = ConfigurationManager.AppSettings["redirectUri"];
-
-        //InstagramConfig config = new InstagramConfig(clientId, clientSecret, redirectUri, "");
 
         public async new Task<ActionResult> Index()
         {
-            //var oAuthResponse = Session["InstaSharp.AuthInfo"] as OAuthResponse;
-            //var userResponse = Session["InstaSharp.UserInfo"] as UserResponse;
-            //var mediaResponse = Session["InstaSharp.Media"] as MediasResponse;
+            var user = (UserDefinition)Serenity.Authorization.UserDefinition;
+            var instagramAccount = "";
+            using (var connection = SqlConnections.NewByKey("Default"))
+            using (var uow = new UnitOfWork(connection))
+            {
+                var tenant = uow.Connection.TryById<TenantsRow>(user.TenantId);
+                instagramAccount = tenant.InstagramAccount;
+            }
 
-            //if (oAuthResponse == null)
-            //{
-            //    return RedirectToAction("Login");
-            //}
-
-            //if (userResponse == null)
-            //{
-            //    userResponse = await GetUserInfo(oAuthResponse);
-            //    mediaResponse = Session["InstaSharp.Media"] as MediasResponse;
-            //}
-
-            //ViewData["Media"] = mediaResponse.Data;
-            var url = string.Format("https://www.instagram.com/_chalicefarms/?__a=1");
+            var url = string.Format("https://www.instagram.com/" + instagramAccount + "/?__a=1");
 
             var syncClient = new WebClient();
             var content = syncClient.DownloadString(url);

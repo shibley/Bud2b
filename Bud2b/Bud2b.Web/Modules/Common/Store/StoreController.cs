@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,6 +17,8 @@ namespace Bud2b.Modules.Common.Profile
     using System.Net;
     using System.Runtime.Serialization.Json;
     using System.Text;
+    using Serenity.Data;
+    using Default.Entities;
 
     [RoutePrefix("Store"), Route("{action=index}")]
     public class StoreController : Controller
@@ -23,21 +26,44 @@ namespace Bud2b.Modules.Common.Profile
 
         public async new Task<ActionResult> Index()
         {
-            var url = string.Format("https://www.instagram.com/_chalicefarms/?__a=1");
+            var host = Request.Url.Host.Replace("www", "");
+            var index = host.IndexOf(".");
+            var subdomain = host.Substring(0, index);
 
-            var syncClient = new WebClient();
-            var content = syncClient.DownloadString(url);
-
-            // Create the Json serializer and parse the response
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Instagram.RootObject));
-            Instagram.RootObject instagramData = null;
-            using (var ms = new MemoryStream(Encoding.Unicode.GetBytes(content)))
+            var user = (UserDefinition)Serenity.Authorization.UserDefinition;
+            var t = TenantsRow.Fields;
+            var instagramAccount = "";
+            using (var c = SqlConnections.NewByKey("Default"))
             {
-                // deserialize the JSON object using the WeatherData type.
-                instagramData = (Instagram.RootObject)serializer.ReadObject(ms);
+                instagramAccount = c.Query<string>(
+                    new SqlQuery()
+                        .From(t)
+                        .Select(t.InstagramAccount)
+                        .Where(
+                            new Criteria("[Domain]") == subdomain))
+                        .FirstOrDefault();
             }
 
-            return View(MVC.Views.Common.Store.StorePage, instagramData);//, userResponse.Data);
+            if (instagramAccount != "")
+            {
+                var url = string.Format("https://www.instagram.com/" + instagramAccount + "/?__a=1");
+
+                var syncClient = new WebClient();
+                var content = syncClient.DownloadString(url);
+
+                // Create the Json serializer and parse the response
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Instagram.RootObject));
+                Instagram.RootObject instagramData = null;
+                using (var ms = new MemoryStream(Encoding.Unicode.GetBytes(content)))
+                {
+                    // deserialize the JSON object using the WeatherData type.
+                    instagramData = (Instagram.RootObject)serializer.ReadObject(ms);
+                }
+
+                return View(MVC.Views.Common.Store.StorePage, instagramData);
+            }
+            else
+                return View(MVC.Views.Common.Store.StorePage);
         }
 
         static void asyncClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
